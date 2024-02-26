@@ -10,16 +10,21 @@ import {
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [imageClick, setImageClicks] = useState(0);
   const [image, setImage] = useState(
     "https://reactnative.dev/docs/assets/p_cat2.png",
   );
   const [bgColor, setBgColor] = useState("white");
 
-  const handleIncrement = () => {
-    setCount((prev) => prev + 1);
-    if (count === 2) {
+  const handleImageClick = () => {
+    setImageClicks((prev) => prev + 1);
+    if (imageClick === 2) {
       setImage("https://avatars.githubusercontent.com/u/71830780?v=4");
     }
+  };
+
+  const handleIncrement = () => {
+    setCount((prev) => prev + 1);
   };
 
   const handleDecrement = () => {
@@ -45,12 +50,14 @@ export default function App() {
           {count}
         </Text>
         <Button title="somar" onPress={handleIncrement} />
-        <Image
-          source={{
-            uri: image,
-          }}
-          style={styles.image}
-        />
+        <TouchableWithoutFeedback onPress={handleImageClick}>
+          <Image
+            source={{
+              uri: image,
+            }}
+            style={styles.image}
+          />
+        </TouchableWithoutFeedback>
       </View>
     </TouchableWithoutFeedback>
   );
